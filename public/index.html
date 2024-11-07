@@ -6,71 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lyrics Search</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
-
-    .search-container {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-
-    .search-form {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    .lyrics-container {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      white-space: pre-line;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 20px;
-      display: none;
-    }
-
-    .error {
-      color: red;
-      margin-top: 10px;
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -87,63 +23,8 @@
   <div id="loading" class="loading">Searching for lyrics...</div>
   <div id="lyricsResult" class="lyrics-container"></div>
 
-  <script>
-    async function searchLyrics() {
-      const songTitle = document.getElementById('songTitle').value.trim();
-      const artistName = document.getElementById('artistName').value.trim();
-      const loadingDiv = document.getElementById('loading');
-      const errorDiv = document.getElementById('error');
-      const lyricsDiv = document.getElementById('lyricsResult');
-
-      if (!songTitle) {
-        errorDiv.textContent = 'Please enter a song title';
-        errorDiv.style.display = 'block';
-        return;
-      }
-
-      loadingDiv.style.display = 'block';
-      errorDiv.style.display = 'none';
-      lyricsDiv.textContent = '';
-
-      try {
-        // First, get the song URL
-        const searchResponse = await fetch(`/api/search?songTitle=${encodeURIComponent(songTitle)}&artistName=${encodeURIComponent(artistName)}`);
-        const searchData = await searchResponse.json();
-
-        if (searchData.error) {
-          throw new Error(searchData.error);
-        }
-
-        // Then, get the lyrics
-        const lyricsResponse = await fetch(`/api/lyrics?url=${encodeURIComponent(searchData.url)}`);
-        const lyricsData = await lyricsResponse.json();
-
-        if (lyricsData.error) {
-          throw new Error(lyricsData.error);
-        }
-
-        lyricsDiv.textContent = lyricsData.lyrics;
-
-        // Clear input fields after successful lyrics fetch
-        document.getElementById('songTitle').value = '';
-        document.getElementById('artistName').value = '';
-
-      } catch (error) {
-        errorDiv.textContent = error.message;
-        errorDiv.style.display = 'block';
-      } finally {
-        loadingDiv.style.display = 'none';
-      }
-    }
-
-    // Allow Enter key to trigger search
-    document.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        searchLyrics();
-      }
-    });
-
-  </script>
+  <!-- Add the JavaScript file at the end of body -->
+  <script src="script.js"></script>
 </body>
 
 </html>
