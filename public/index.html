@@ -123,6 +123,11 @@
         }
 
         lyricsDiv.textContent = lyricsData.lyrics;
+
+        // Clear input fields after successful lyrics fetch
+        document.getElementById('songTitle').value = '';
+        document.getElementById('artistName').value = '';
+
       } catch (error) {
         errorDiv.textContent = error.message;
         errorDiv.style.display = 'block';
@@ -137,6 +142,7 @@
         searchLyrics();
       }
     });
+
   </script>
 </body>
 
