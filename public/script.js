@@ -46,7 +46,7 @@ async function searchLyrics() {
   }
 }
 
-// Allow Enter key to trigger search
+// Allow Enter key to trigger search instead of Search button.
 document.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     searchLyrics();
