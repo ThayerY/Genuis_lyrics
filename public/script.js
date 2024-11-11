@@ -4,7 +4,6 @@ async function searchLyrics() {
   const loadingDiv = document.getElementById('loading');
   const errorDiv = document.getElementById('error');
   const lyricsDiv = document.getElementById('lyricsResult');
-  // document.querySelector('.lyrics-text').textContent = songInfo.lyrics;
 
   if (!songTitle) {
     errorDiv.textContent = 'Please enter a song title';
